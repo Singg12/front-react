@@ -53,11 +53,11 @@ const BannerOne = () => {
                             <i className="ph ph-caret-double-down" />
                         </span>
                     </a> */}
-                    <img
+                    {/* <img
                         src="/assets/images/bg/banner-bg.png"
                         alt=""
                         className="banner-img position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 z-n1 object-fit-cover rounded-24"
-                    />
+                    /> */}
                     
                     <div className="banner-slider">
                         <Slider {...settings}>
@@ -65,7 +65,7 @@ const BannerOne = () => {
                                 <div className="banner-slider__inner flex-between position-relative">
                                     <div className="banner-item__content">
                                         <h1 className="banner-item__title bounce">
-                                            Daily Grocery Order and Get Express Delivery
+                                        Discover the Best Bikes at Fit Gear!
                                         </h1>
                                         <Link
                                             to="/shop"
@@ -78,7 +78,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img1.png" alt="" />
+                                        <img src="assets/img/banner3.jpg" alt="" className="rounded-24" />
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@ const BannerOne = () => {
                                 <div className="banner-slider__inner flex-between position-relative">
                                     <div className="banner-item__content">
                                         <h1 className="banner-item__title">
-                                            Daily Grocery Order and Get Express Delivery
+                                            Find Your Perfect Ride at Fit Gear!
                                         </h1>
                                         <Link
                                             to="/shop"
@@ -98,8 +98,9 @@ const BannerOne = () => {
                                             </span>
                                         </Link>
                                     </div>
-                                    <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img3.png" alt="" />
+                                    <div className="banner-item__thumb ">
+                                        <img src="assets/img/banner2.jpg" alt="" className="rounded-24"/>
+
                                     </div>
                                 </div>
                             </div>

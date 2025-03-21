@@ -6,14 +6,25 @@ import {useCart} from './CartAdd';
 
 
 const ShopSection = () => {
+    const {addToCart} = useCart();
+
 
     const [products, setProducts] = useState([]);
-    const {addToCart} = useCart();
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/bikes   ')
-            .then((response) => setProducts(response.data))
-            .catch((error) => console.error('Error fetching products:', error));
-    }, []);
+
+useEffect(() => {
+  axios
+    .get('http://localhost:8000/api/products')
+    .then((response) => {
+      console.log('Fetched products:', response.data); // Log data to check the structure
+
+      // If the response contains a 'data' field, use that as the products array
+      const productsData = Array.isArray(response.data) ? response.data : response.data.data || [];
+      setProducts(productsData);  // Update the state with the fetched products
+    })
+    .catch((error) => console.error('Error fetching products:', error));
+}, []);
+
+console.log('Products state:', products);
 
 
     let [grid, setGrid] = useState(false)
@@ -47,7 +58,31 @@ const ShopSection = () => {
                                             to="/product-details-two"
                                             className="text-gray-900 hover-text-main-600"
                                         >
-                                            Mobile &amp; Accessories (12)
+                                            Road Bike 
+                                        </Link>
+                                    </li>
+                                    <li className="mb-24">
+                                        <Link
+                                            to="/product-details-two"
+                                            className="text-gray-900 hover-text-main-600"
+                                        >
+                                            Mountain Bike
+                                        </Link>
+                                    </li>
+                                    <li className="mb-24">
+                                        <Link
+                                            to="/product-details-two"
+                                            className="text-gray-900 hover-text-main-600"
+                                        >
+                                            Fixed Gear
+                                        </Link>
+                                    </li>
+                                    <li className="mb-24">
+                                        <Link
+                                            to="/product-details-two"
+                                            className="text-gray-900 hover-text-main-600"
+                                        >
+                                            Accessories
                                         </Link>
                                     </li>
                        
@@ -108,7 +143,10 @@ const ShopSection = () => {
 
                        
                         <div className="row">
-                        {products.map((product) => (
+                        {products.length === 0 ? (
+                                <p>Loading products...</p> // Show loading message while data is being fetched
+                                ) : (
+                                products.map((product) => (
                                         <div key={product.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                                             <div className="product-card h-180 p-16 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2">
                                                 <Link
@@ -177,7 +215,8 @@ const ShopSection = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
+                                  ))
+                                )}
                                 </div>    
  
 

@@ -104,7 +104,7 @@ const HeaderOne = () => {
                 </button>
                 <div className="mobile-menu__inner">
                     <Link to="/" className="mobile-menu__logo">
-                        <img src="assets/images/logo/logo.png" alt="Logo" />
+                        <img src="assets/img/logo1.png" alt="Logo" />
                     </Link>
                     <div className="mobile-menu__menu">
                         {/* Nav Menu Start */}
@@ -312,7 +312,7 @@ const HeaderOne = () => {
                                 <ul className="nav-menu flex-align ">
                                 <div className="logo">
                             <Link to="/" className="link">
-                                <img src="assets/images/logo/logo.png" alt="Logo" />
+                                <img src="assets/img/logo1.png" alt="Logo" />
                             </Link>
                         </div>
                                     <li className="on-hover-item nav-menu__item ">
@@ -475,7 +475,10 @@ const HeaderOne = () => {
                                     <option value={1} >
                                         All Categories
                                     </option>
-                                    <option value={1}>Grocery</option>
+                                    <option value={1}>Road Bike</option>
+                                    <option value={1}>Mountain Bike</option>
+                                    <option value={1}>Fixed Bike</option>
+                                    <option value={1}>Acessories</option>
                                     {/* <option value={1}>Breakfast &amp; Dairy</option>
                                     <option value={1}>Vegetables</option>
                                     <option value={1}>Milks and Dairies</option>

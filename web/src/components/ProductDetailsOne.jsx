@@ -8,24 +8,27 @@ import { useCart } from './CartAdd';
 const ProductDetailsOne = () => {
 
     const { id } = useParams(); // clearly get id from URL
-    const [product, setProduct] = useState(null);
+    // const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const { addToCart } = useCart();
 
+    const [products, setProducts] = useState([]);
+
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${id}`)
-            .then((response) => {
-                setProduct(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                setLoading(false);
-            });
+      axios
+        .get(`http://localhost:8000/api/products/${id}`)
+        .then((response) => {
+          console.log('Fetched products:', response.data); // Log data to check the structure
+    
+          // If the response contains a 'data' field, use that as the products array
+          const productsData = Array.isArray(response.data) ? response.data : response.data.data || [];
+          setProducts(productsData);  // Update the state with the fetched products
+        })
+        .catch((error) => console.error('Error fetching products:', error));
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
-    if (!product) return <div>Product not found.</div>;
+    // if (loading) return <div>Loading...</div>;
+    // if (!product) return <div>Product not found.</div>;
 
     // const [timeLeft, setTimeLeft] = useState(getCountdown());
 
@@ -59,6 +62,7 @@ const ProductDetailsOne = () => {
         slidesToScroll: 1,
         focusOnSelect: true,
     };
+    console.log("image",products.image);
     return (
         <section className="product-details py-80">
             <div className="container container-lg">
@@ -70,16 +74,16 @@ const ProductDetailsOne = () => {
                                     <div className="product-details__thumb-slider border border-gray-100 rounded-16">
                                         <div className="">
                                             <div className="product-details__thumb flex-center h-100">
-                                                <img src="" alt="Main Product" />
+                                                <img src={products.image} alt="Main Product" />
                                             </div>
-                                        </div>
+                                        </div>  
                                     </div>
                                     <div className="mt-24">
                                         <div className="product-details__images-slider">
                                             <Slider {...settingsThumbs}>
                                                 {productImages.map((image, index) => (
                                                     <div className="center max-w-120 max-h-120 h-100 flex-center border border-gray-100 rounded-16 p-8" key={index} >
-                                                        <img className='thum' src={product.image} alt={`Thumbnail ${index}`} />
+                                                        <img className='thum' src={products.image} alt={`Thumbnail ${index}`} />
                                                     </div>
                                                 ))}
                                             </Slider>
@@ -92,7 +96,7 @@ const ProductDetailsOne = () => {
                             </div>
                             <div className="col-xl-6">
                                 <div className="product-details__content">
-                                    <h5 className="mb-12">{product.name}</h5>
+                                    <h5 className="mb-12">{products.name}</h5>
                                     <div className="flex-align flex-wrap gap-12">
                                         <div className="flex-align gap-12 flex-wrap">
                                             <div className="flex-align gap-8">
@@ -133,7 +137,7 @@ const ProductDetailsOne = () => {
                                     </p>
                                     <div className="mt-32 flex-align flex-wrap gap-32">
                                         <div className="flex-align gap-8">
-                                            <h4 className="mb-0">{product.price}</h4>
+                                            <h4 className="mb-0">{products.price}</h4>
                                             <span className="text-md text-gray-500">250.00</span>
                                         </div>
                                         {/* <Link to="#" className="btn btn-main rounded-pill">
@@ -214,7 +218,7 @@ const ProductDetailsOne = () => {
                                                 </button>
                                             </div>
                                             <Link
-                                                 onClick={() => addToCart(product)}
+                                                 onClick={() => addToCart(products)}
                                                 className="btn btn-main rounded-pill flex-align d-inline-flex gap-8 px-48"
                                             >
                                                 {" "}
